@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# Ortho Market | Admin Panel
 
-TODO: Document your project here
+Welcome to the Ortho Market Admin Panel.
