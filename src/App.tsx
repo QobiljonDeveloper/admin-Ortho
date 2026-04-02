@@ -8,6 +8,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Products from "./pages/Products";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 import Categories from "./pages/Categories";
 import Brands from "./pages/Brands";
 import Orders from "./pages/Orders";
@@ -15,7 +16,14 @@ import UsersPage from "./pages/UsersPage";
 import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -30,6 +38,7 @@ const App = () => (
               <Route element={<AppLayout />}>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/products" element={<Products />} />
+                <Route path="/products/:id" element={<ProductDetailsPage />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/brands" element={<Brands />} />
                 <Route path="/orders" element={<Orders />} />

@@ -1,36 +1,63 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
+export interface User {
+  id: string;
+  telegramId: number;
+  fullName: string;
+  username: string;
+  phone: string;
+  email: string | null;
+  role: number;
+  isActive: boolean;
+  language: number;
+  photoUrl: string;
+  createdAt: string;
+}
+
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (email: string, password: string) => boolean;
+  user: User | null;
+  login: (token: string, user: User) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("ortho_token"));
+  const [user, setUser] = useState<User | null>(() => {
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
 
-  const login = (email: string, password: string) => {
-    if (email === "admin@ortho.uz" && password === "admin123") {
-      localStorage.setItem("ortho_token", "mock-jwt-token");
-      setIsAuthenticated(true);
-      return true;
-    }
-    return false;
+  const login = (token: string, userData: User) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
+    setIsAuthenticated(true);
   };
 
   const logout = () => {
-    localStorage.removeItem("ortho_token");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
     setIsAuthenticated(false);
   };
 
   useEffect(() => {
-    setIsAuthenticated(!!localStorage.getItem("ortho_token"));
+    const token = localStorage.getItem("token");
+    const savedUser = localStorage.getItem("user");
+    if (token && savedUser) {
+      setIsAuthenticated(true);
+      setUser(JSON.parse(savedUser));
+    } else {
+      setIsAuthenticated(false);
+      setUser(null);
+    }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

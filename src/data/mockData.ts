@@ -46,13 +46,7 @@ export interface Order {
   items: OrderItem[];
 }
 
-export const defaultCategories: Category[] = [
-  { id: "cat-1", nameUz: "Ortopedik yostiqlar", nameRu: "Ортопедические подушки", nameEn: "Orthopedic Pillows", slug: "orthopedic-pillows" },
-  { id: "cat-2", nameUz: "Matraslar", nameRu: "Матрасы", nameEn: "Mattresses", slug: "mattresses" },
-  { id: "cat-3", nameUz: "Korsettlar", nameRu: "Корсеты", nameEn: "Corsets", slug: "corsets" },
-  { id: "cat-4", nameUz: "Tizzaliklar", nameRu: "Наколенники", nameEn: "Knee Braces", slug: "knee-braces" },
-  { id: "cat-5", nameUz: "Oyoq kiyimlari", nameRu: "Обувь", nameEn: "Footwear", slug: "footwear" },
-];
+export const defaultCategories: Category[] = [];
 
 export const defaultBrands: Brand[] = [
   { id: "brand-1", name: "OrthoComfort", logo: "🏥" },

@@ -14,8 +14,8 @@ function save<T>(key: string, data: T) {
 export function getProducts(): Product[] { return getOrInit("ortho_products", defaultProducts); }
 export function saveProducts(p: Product[]) { save("ortho_products", p); }
 
-export function getCategories(): Category[] { return getOrInit("ortho_categories", defaultCategories); }
-export function saveCategories(c: Category[]) { save("ortho_categories", c); }
+export function getCategories(): Category[] { return []; }
+export function saveCategories(c: Category[]) { /* No-op for real API */ }
 
 export function getBrands(): Brand[] { return getOrInit("ortho_brands", defaultBrands); }
 export function saveBrands(b: Brand[]) { save("ortho_brands", b); }
