@@ -12,7 +12,6 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import Categories from "./pages/Categories";
 import Brands from "./pages/Brands";
 import Orders from "./pages/Orders";
-import UsersPage from "./pages/UsersPage";
 import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 
@@ -42,7 +41,6 @@ const App = () => (
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/brands" element={<Brands />} />
                 <Route path="/orders" element={<Orders />} />
-                <Route path="/users" element={<UsersPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
               </Route>
               <Route path="*" element={<NotFound />} />

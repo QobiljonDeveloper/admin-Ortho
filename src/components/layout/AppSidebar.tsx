@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { NavLink } from "@/components/NavLink";
-import { LayoutDashboard, Package, FolderTree, Tag, ShoppingCart, Users, Settings } from "lucide-react";
+import { LayoutDashboard, Package, FolderTree, Tag, ShoppingCart, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -20,7 +20,6 @@ const navItems = [
   { title: "Categories", url: "/categories", icon: FolderTree },
   { title: "Brands", url: "/brands", icon: Tag },
   { title: "Orders", url: "/orders", icon: ShoppingCart },
-  { title: "Users", url: "/users", icon: Users },
   { title: "Settings", url: "/settings", icon: Settings },
 ];
 

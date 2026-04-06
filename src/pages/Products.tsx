@@ -61,6 +61,21 @@ const emptyForm: ProductData = {
 
 const ITEMS_PER_PAGE = 10;
 
+export interface DeleteProductRequest {
+  deletedBy: string;
+}
+
+export const deleteProduct = async (productId: string) => {
+  const userId = localStorage.getItem("user_id");
+  if (!userId) throw new Error("User ID not found in storage");
+
+  const requestParams: DeleteProductRequest = {
+    deletedBy: userId
+  };
+
+  return await api.delete(`/api/products/${productId}`, { params: requestParams });
+};
+
 export default function Products() {
   const navigate = useNavigate();
   const [filterCat, setFilterCat] = useState("all");
@@ -72,7 +87,6 @@ export default function Products() {
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const DUMMY_USER_ID = "admin-user-123";
 
   // Reset pagination when category filter changes
   useEffect(() => {
@@ -176,7 +190,7 @@ export default function Products() {
   const handleDelete = async () => {
     if (!deleteId) return;
     try {
-      await api.delete(`/api/products/${deleteId}?deletedBy=${DUMMY_USER_ID}`);
+      await deleteProduct(deleteId);
       toast({ title: "Product deleted successfully" });
 
       // Update local state without refetching via setQueryData
